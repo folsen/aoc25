@@ -1,3 +1,5 @@
+from textwrap import wrap
+
 input = []
 with open("input.txt") as file:
     line = [line.rstrip() for line in file][0]
@@ -16,10 +18,28 @@ def is_symmetrical(i):
         return False
 
 
+def is_repeating(i):
+    s = str(i)
+    for l in range(1, len(s) // 2 + 2):
+        chunks = wrap(s, l)
+        if len(chunks) > 1 and len(set(chunks)) == 1:
+            return True
+    return False
+
+
+# Part 1
+# false_ids = []
+# for r in input:
+#     for i in r:
+#         if is_symmetrical(i):
+#             false_ids.append(i)
+
+# print(sum(false_ids))
+
+# Part 2
 false_ids = []
 for r in input:
     for i in r:
-        if is_symmetrical(i):
+        if is_repeating(i):
             false_ids.append(i)
-
 print(sum(false_ids))
